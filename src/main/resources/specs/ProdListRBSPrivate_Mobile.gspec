@@ -1,0 +1,119 @@
+@rule if %{objectName} is visible
+    @if ${isVisible(objectName)}
+        @ruleBody
+@objects
+	FullContentsSection-*						css				.prod_list_wrapper
+	Full_FirstRowTitleComponent-*				css				.prod_list_wrapper .prod_list_top .list_loan .list_loan_subtitle
+		RTEText									css				p
+	Full_FirstRowImageContent-*					css				.prod_list_wrapper .prod_list_top .list_img
+	Full_SecondRowIconSection-*					css				.prod_list_wrapper .prod_list_top .list_loan .list_loan_icontext
+		IconContent								css				 img
+		IconRichText							css				.comp-rich-text
+		IconRichTextinside						css				p
+	Full_ThirdRowRTESection-*					css				.prod_list_wrapper .prod_list_top .list_loan .list_loan_fee
+		RTEText									css				 p
+	Full_FourthRowRTESection-*					css				.prod_list_wrapper .prod_list_top .list_apr .comp-rich-text
+		RTEText									css				 p
+	Full_FifthRowCTASection-*					css				.prod_list_wrapper .list_cta
+		FirstCTA-*								css				a
+		
+= Full Content Section = 
+
+    FullContentsSection-*:
+		css border-top-width is "2px"
+		css border-bottom-width is "2px"
+		css border-left-width is "2px"
+		css border-right-width is "2px"
+		css border-top-left-radius is "8px"
+		css border-bottom-left-radius is "8px"
+		css border-top-right-radius is "8px"
+		css border-bottom-right-radius is "8px"
+		css background-color is "rgba(238, 237, 233, 1)"
+= First Row Contents =
+	@for [ 1 - ${count("Full_FirstRowTitleComponent-*.RTEText")}] as index
+		Full_FirstRowTitleComponent-${index}.RTEText:
+			inside Full_FirstRowTitleComponent-${index} 14px left, 16px right, 11px top, 13px bottom 
+			css font-family contains "RNHouseSansLight"
+			css font-size is "22px"
+			css line-height is "26px"
+			css color is "rgba(10, 47, 100, 1)"
+	
+		Full_FirstRowImageContent-${index}:
+			width 69px
+			height 44px
+			inside FullContentsSection-${index} 16px top
+	
+= Second Row Contents =
+	@for [ 1 - ${count("Full_SecondRowIconSection-*.IconContent")}] as indexing
+		Full_SecondRowIconSection-${indexing}.IconContent:
+			width 32px
+			height 32px
+			inside Full_SecondRowIconSection-${indexing} 17px top bottom, 14px left
+			near Full_SecondRowIconSection-${indexing}.IconRichText 15px left
+
+		
+		Full_SecondRowIconSection-${indexing}.IconRichText:
+			width 209px
+			height 44px
+			inside Full_SecondRowIconSection-${indexing} 11px top bottom, 14px right
+			right-of Full_SecondRowIconSection-${indexing}.IconContent 15px
+	
+		Full_SecondRowIconSection-${indexing}.IconRichTextinside:
+			css font-family contains "RNHouseSansLight"
+			css font-size is "16px"
+			css line-height is "22px"
+			css color is "rgba(102, 102, 102, 1)"	
+
+
+= Third Row Contents =		
+	@for [ 1 - ${count("Full_ThirdRowRTESection-*.RTEText")} ] as index
+		| if Full_ThirdRowRTESection-${index}.RTEText is visible	
+			Full_ThirdRowRTESection-${index}.RTEText:
+				css font-size is "14px"
+				css line-height is "18px"
+				css font-family contains "RNHouseSansLight"
+				css color is "rgba(102, 102, 102, 1)"
+				css border-bottom-width is "1px"
+				css padding-bottom is "12px"
+				css padding-left is "14px"
+				css padding-right is "14px"
+				css padding-top is "13px"
+
+= Fourth Row Contents =
+	@for [ 1 - ${count("Full_FourthRowRTESection-*.RTEText")} ] as index
+		| if Full_FourthRowRTESection-${index}.RTEText is visible
+			Full_FourthRowRTESection-${index}.RTEText:
+				css font-size is "16px"
+				css line-height is "22px"
+				css font-family contains "RNHouseSansLight"
+				css color is "rgba(10, 47, 100, 1)"
+				css border-bottom-width is "1px"
+				css padding-bottom is "11px"
+				css padding-left is "14px"
+				css padding-right is "14px"
+				css padding-top is "10px"
+		
+= Fifth Row Contents = 
+	@for [ 1 - ${count("Full_FifthRowCTASection-*.FirstCTA-1")} ] as index
+		| if Full_FifthRowCTASection-${index}.FirstCTA-1 is visible	
+			Full_FifthRowCTASection-${index}.FirstCTA-1:
+				height 44px
+				width 256px
+				css padding-top is "12px"
+				css padding-bottom is "10px"
+				inside Full_FifthRowCTASection-${index} 14px left right, 16px top
+				css font-family contains "RNHouseSansLight"
+				css font-size is "18px"
+				css background-color is "rgba(10, 47, 100, 1)"
+	
+		| if Full_FifthRowCTASection-${index}.FirstCTA-2 is visible
+			Full_FifthRowCTASection-${index}.FirstCTA-2:
+				below Full_FifthRowCTASection-${index}.FirstCTA-1 19px
+				css font-family contains "RNHouseSansLight"
+				css font-size is "18px"
+				css color is "rgba(10, 47, 100, 1)"
+				css text-align is "center"
+		
+		
+	
+	
